@@ -30,7 +30,6 @@ class Xsll
           {
                 if(head==NULL && tail==NULL)
                 {
-                    cout <<"vfv" << endl;
                   Node* t = new Node;
                   head  = t;
                   head->data = x; 
@@ -38,24 +37,17 @@ class Xsll
                  
             
                 }
-
-                else if(head==tail)
-                {
-                    Node* t = new Node;
-                    head = t;
-                    head->next = tail;
-                }
-
+            
                 else if((head==NULL && tail!=NULL)  ||  (head!=NULL && tail==NULL))
                 {
                     throw "Exception: Memory Coruption";
                 }
-              
+
                 else
                 {
                     Node* t = new Node;
                     t->next = head;
-                    head = t;   
+                    head = t;                    
                 }
           }
           
@@ -66,19 +58,16 @@ class Xsll
     }
     void AppendNode(int x)
     {
-        if(head==tail)
+        if(head==NULL && tail==NULL)
         {
-           Node* t = new Node;
-           head->next = tail = t;
-           tail->data = x;
-           tail->next = NULL;
+          InsertHead(x);
         }
         else
         {
             Node* t = new Node;
-            tail->next = t;
-            tail = t;
-            tail->data = x;
+            t->next = NULL;
+            t->data = x;
+            tail = t;          
         }
       
     }
@@ -196,10 +185,7 @@ class Xsll
       
     }
 
-    void DeleteList()
-    {
-      head = tail = NULL;
-    }
+ 
     
 };
 
