@@ -16,7 +16,8 @@ class Xsll
    public:
     Xsll()
     {
-      head = tail = NULL;
+      head = NULL;
+      tail = head;
     }
     
     ~Xsll()
@@ -30,11 +31,11 @@ class Xsll
           {
                 if(head==NULL && tail==NULL)
                 {
+                    
                   Node* t = new Node;
-                  head  = t;
-                  head->data = x; 
-                  tail = head;
-                 
+                  t->data = x;
+                  t->next = NULL;
+                  head = tail = t;
             
                 }
             
@@ -47,6 +48,7 @@ class Xsll
                 {
                     Node* t = new Node;
                     t->next = head;
+                    t->data = x;
                     head = t;                    
                 }
           }
@@ -67,6 +69,7 @@ class Xsll
             Node* t = new Node;
             t->next = NULL;
             t->data = x;
+            tail->next = t;
             tail = t;          
         }
       
