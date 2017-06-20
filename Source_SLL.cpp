@@ -11,89 +11,102 @@ struct Node
 class Xsll
 {
    Node* head;
-   Node* tail;
+   
    
    public:
     Xsll()
     {
       head = NULL;
-      tail = head;
     }
     
     ~Xsll()
     {
       free(head);
-      free(tail);
+     
+    }
+    
+    int Nodes()  //Number of Nodes
+    {
+        try
+        {
+            if(head)
+            {
+                Node* t = head;
+                int k = 1;
+                while(t->next != NULL)
+                {
+                    t = t->next;
+                    k++;
+                }
+                
+                return k;
+            }
+            
+            else
+            {
+                throw "No nodes in the list";
+            }
+        }
+        
+        catch(char* msg)
+        {
+            cout << msg << endl;
+        }
+    }
+    int NodeValue(int n)  // Value of a particular Node
+    {
+        
+        Node* t = head;
+        for(int i = 2;i <= n;i++)
+        {
+            t = t->next;
+        }
+        
+        return t->data;
     }
     void InsertHead(int x)
     {
-          try
-          {
-                if(head==NULL && tail==NULL)
-                {
-                    
-                  Node* t = new Node;
-                  t->data = x;
-                  t->next = NULL;
-                  head = tail = t;
-            
-                }
-            
-                else if((head==NULL && tail!=NULL)  ||  (head!=NULL && tail==NULL))
-                {
-                    throw "Exception: Memory Coruption";
-                }
-
-                else
-                {
-                    Node* t = new Node;
-                    t->next = head;
-                    t->data = x;
-                    head = t;                    
-                }
-          }
-          
-          catch(char* msg)
-          {
-              cout << msg << endl;
-          }
+         
+            Node* t = new Node;
+            t->next = head;
+            t->data = x;
+            head = t;                    
     }
     void AppendNode(int x)
     {
-        if(head==NULL && tail==NULL)
+        if(head==NULL)
         {
           InsertHead(x);
         }
         else
         {
+            Node* te = head;
+        
+            while(te->next != NULL)
+            {
+                te = te->next;
+            }
             Node* t = new Node;
             t->next = NULL;
             t->data = x;
-            tail->next = t;
-            tail = t;          
+            te->next = t;
         }
       
     }
-    
-    void RemoveNode(int n)
+
+    void RemoveNode(int n)  // 'n' is position of node
     {
         try
         {
-            if(head==NULL && tail==NULL)
+            if(head==NULL)
             {
               throw "Exception: No Nodes in the linked list";
             }
             
-            else if((head!=NULL && tail==NULL ) || (head==NULL && tail!=NULL))
-            {
-              throw 0;
-            }
-            
-          
         
             else if(n==1)  
             {
-              if(head==tail)
+              if(head->next==NULL)
                 free(head);
               
               else
@@ -110,7 +123,7 @@ class Xsll
             { 
                   Node* tx  = head;
                   int k = 1;
-                  while(tx!=tail)
+                  while(tx->next!=NULL)
                   {
                       tx = tx->next;
                       k++;
@@ -131,10 +144,10 @@ class Xsll
                   
                   Node* t = head;
                   Node* te = head;
-                  for(int i = 0;i<(n-1);i++)
+                  for(int i = 2;i<=(n);i++)
                   {
                     t = t->next;
-                    if(i<(n-2))
+                    if(i<=(n-1))
                       te = te->next;
                   }
 
@@ -145,15 +158,13 @@ class Xsll
                         {
                           Node* temp = t;
                           head->next = NULL;
-                          tail = head;
                           free(temp);
                         }
 
                         else
                         {  
-                          Node* temp = tail; 
+                          Node* temp = t; 
                           te->next = NULL;
-                          tail = te;
                           free(temp);                
                         }                
                   }
@@ -181,11 +192,21 @@ class Xsll
         {
           cout << msg << endl;
         }
-        catch(int e)
-        {
-            cout <<"Exception: Memory Corruption" << endl;
-        }
       
+    }
+    
+    void DeleteList()
+    {
+        Node* temp = head;
+        Node* t;
+        while(temp!=NULL)
+        {
+            t = temp->next;
+            free(temp);
+            temp = t;
+        }
+        
+        head = NULL;
     }
 
  
@@ -196,7 +217,14 @@ int main()
 {
     Xsll l1,l2;
     l1.InsertHead(34);
-    //l1.AppendNode(54);
+    l1.InsertHead(455);
+    l1.AppendNode(54);
+    l1.RemoveNode(2);
+
+    cout << l1.NodeValue(2) << endl;
+    l1.DeleteList();
+    cout << l1.Nodes() << endl;
+    
     //l1.RemoveNode(1);
     
 
