@@ -11,8 +11,7 @@ struct Node
 class Xsll
 {
    Node* head;
-   
-   
+  
    public:
     Xsll()
     {
@@ -44,13 +43,13 @@ class Xsll
             
             else
             {
-                throw "No nodes in the list";
+                throw 0;
             }
         }
         
-        catch(char* msg)
+        catch(int e)
         {
-            cout << msg << endl;
+            cout << "No Nodes in the List" << endl;
         }
     }
     int NodeValue(int n)  // Value of a particular Node
@@ -66,11 +65,10 @@ class Xsll
     }
     void InsertHead(int x)
     {
-         
-            Node* t = new Node;
-            t->next = head;
-            t->data = x;
-            head = t;                    
+        Node* t = new Node;
+        t->next = head;
+        t->data = x;
+        head = t;                    
     }
     void AppendNode(int x)
     {
@@ -81,7 +79,7 @@ class Xsll
         else
         {
             Node* te = head;
-        
+          
             while(te->next != NULL)
             {
                 te = te->next;
@@ -107,7 +105,10 @@ class Xsll
             else if(n==1)  
             {
               if(head->next==NULL)
+              {
                 free(head);
+                head = NULL;
+              }
               
               else
               {
@@ -216,17 +217,29 @@ class Xsll
 int main()
 {
     Xsll l1,l2;
-    l1.InsertHead(34);
-    l1.InsertHead(455);
-    l1.AppendNode(54);
-    l1.RemoveNode(2);
-
-    cout << l1.NodeValue(2) << endl;
-    l1.DeleteList();
-    cout << l1.Nodes() << endl;
-    
-    //l1.RemoveNode(1);
-    
-
+  for(int i = 0;i<1000;i++)
+  {
+    l1.InsertHead(rand()%100);
+  }
+  
+ 
+  
+  for(int i = 0;i<1000;i++)
+  {
+      l1.AppendNode(rand()%100);
+  }
+  
+   for(int i = 0;i<1000;i++)
+  {
+      l1.RemoveNode(1);
+  } 
+ cout << l1.Nodes() << endl;
+   for(int i = 0;i<1000;i++)
+  {
+      l1.AppendNode(rand()%100);
+  }
+  l1.DeleteList();
+  cout << l1.Nodes() << endl; 
+  
     
 }
