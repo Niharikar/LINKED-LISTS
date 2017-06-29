@@ -21,6 +21,46 @@ class DLL
   {
     free(head);
   }
+  int Nodes()  //Number of Nodes
+    {
+        try
+        {
+            if(head)
+            {
+                Node* t = head;
+                int k = 1;
+                while(t->next != NULL)
+                {
+                    t = t->next;
+                    k++;
+                }
+                
+                return k;
+            }
+            
+            else
+            {
+                throw 0;
+            }
+        }
+        
+        catch(int e)
+        {
+            cout << "No Nodes in the List" << endl;
+        }
+    }
+    int NodeValue(int n)  // Value of a particular Node
+    {
+        
+        Node* t = head;
+        for(int i = 2;i <= n;i++)
+        {
+            t = t->next;
+        }
+        
+        return t->data;
+    }
+   
   
   void InsertHead(int x)
   { 
