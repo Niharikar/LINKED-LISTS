@@ -13,17 +13,17 @@ class DLL
 {
   Node* head;
   public:
-  
+
   DLL()
   {
     head = NULL;
   }
-  
+
   ~DLL()
   {
     free(head);
   }
-  
+
   int Nodes()  //Number of Nodes
   {
         try
@@ -37,19 +37,20 @@ class DLL
                     t = t->next;
                     k++;
                 }
-                
+
                 return k;
             }
-            
+
             else
             {
                 throw 0;
             }
         }
-        
+
         catch(int e)
         {
             cout << "No Nodes in the List" << endl;
+
         }
     }
     int NodeValue(int n)  // Value of a particular Node
@@ -59,21 +60,21 @@ class DLL
         {
             t = t->next;
         }
-        
+
         return t->data;
     }
-   
-  
+
+
   void InsertHead(int x)
-  { 
+  {
         Node* temp = new Node;
         temp->data = x;
         temp->prev = NULL;
         temp->next = head;
         head = temp;
   }
-   
-   
+
+
    void AppendNode(int x)
    {
       Node* t = head;
@@ -81,7 +82,7 @@ class DLL
       {
         InsertHead(x);
       }
-      
+
       else
       {
         while(t->next!=NULL)
@@ -92,10 +93,11 @@ class DLL
         temp->data = x;
         temp->next = NULL;
         temp->prev = t;
+        t->next = temp;
       }
    }
-    
-    
+
+
    void RemoveNode(int n)
    {
       try
@@ -104,16 +106,16 @@ class DLL
             {
               throw "Exception: No Nodes in the linked list";
             }
-            
-        
-            else if(n==1)  
+
+
+            else if(n==1)
             {
               if(head->next==NULL)
               {
                 free(head);
                 head = NULL;
               }
-              
+
               else
               {
                 Node* temp = head;
@@ -121,12 +123,12 @@ class DLL
                 head->prev = NULL;
                 free(temp);
               }
-              
+
             }
-          
-           
+
+
             else
-            { 
+            {
                   Node* tx  = head;
                   int k = 1;
                   while(tx->next!=NULL)
@@ -139,13 +141,13 @@ class DLL
                       cout << " given position does not exist in the list" << endl;
                       return;
                   }
-                  
+
                   if(n<1)
                   {
                       cout << "Enter a valid number" << endl;
                       return;
                   }
-                  
+
                   Node* t = head;
                   Node* te = head;
                   for(int i = 2;i<=(n);i++)
@@ -166,18 +168,18 @@ class DLL
                         }
 
                         else
-                        {  
-                          Node* temp = t; 
+                        {
+                          Node* temp = t;
                           te->next = NULL;
-                          free(temp);                
-                        }                
+                          free(temp);
+                        }
                   }
-              
-              
+
+
                   else
                   {
                       if(n==2)
-                      {                    
+                      {
                         head->next = t->next;
                         (t->next)->prev = head;
                         free(t);
@@ -187,19 +189,19 @@ class DLL
                       {
                         te->next = t->next;
                         (t->next)->prev = te;
-                        free(t);                   
+                        free(t);
                       }
                   }
-           
+
             }
         }
-       
+
         catch(char* msg)
         {
           cout << msg << endl;
         }
    }
-   
+
    void DeleteList()
    {
         Node* temp = head;
@@ -210,11 +212,11 @@ class DLL
             free(temp);
             temp = t;
         }
-        
+
         head = NULL;
    }
 
-  
+
 };
 
 
@@ -222,30 +224,32 @@ class DLL
 int main()
 {
   DLL l1;
-  for(int i = 0;i<1000;i++)
+  for(int i = 0;i<1000;i++) //INSERTING HEADS 1000 times
   {
     l1.InsertHead(rand()%100);
   }
-    cout << l1.Nodes() << endl; 
-  
-  for(int i = 0;i<1000;i++)
+    cout << l1.Nodes() << endl; // PRINTING no.of nodes
+
+  for(int i = 0;i<1000;i++)  //APPENDING NODES 1000 times
   {
       l1.AppendNode(rand()%100);
   }
-  cout << l1.Nodes() << endl;
-  /*
-   for(int i = 0;i<1000;i++)
+  cout << l1.Nodes() << endl; // PRINTING no. of nodes
+
+   for(int i = 0;i<1000;i++) // REMOVING each node
   {
       l1.RemoveNode(1);
-  } 
- cout << l1.Nodes() << endl;
+  }
+ cout << l1.Nodes() << endl; //PRINITNG no. of nodes
    for(int i = 0;i<1000;i++)
   {
       l1.AppendNode(rand()%100);
   }
-  /*
+
   l1.DeleteList();
-  cout << l1.Nodes() << endl; 
-  */
+  cout << l1.Nodes() << endl;
+
 }
+
+
 
