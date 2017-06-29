@@ -7,22 +7,25 @@ struct Node
   int data;
   Node* next;
   Node* prev;
-}
+};
 
 class DLL
 {
-  int head;
+  Node* head;
   public:
+  
   DLL()
   {
     head = NULL;
   }
-  ~DULL()
+  
+  ~DLL()
   {
     free(head);
   }
+  
   int Nodes()  //Number of Nodes
-    {
+  {
         try
         {
             if(head)
@@ -51,7 +54,6 @@ class DLL
     }
     int NodeValue(int n)  // Value of a particular Node
     {
-        
         Node* t = head;
         for(int i = 2;i <= n;i++)
         {
@@ -64,22 +66,13 @@ class DLL
   
   void InsertHead(int x)
   { 
-      if(head != NULL)
-      {
         Node* temp = new Node;
         temp->data = x;
         temp->prev = NULL;
         temp->next = head;
-        head->prev = temp;
-       }
-       else
-       {
-        Node* temp = new Node;
-        temp->data = x;
-        temp->prev = NULL;
-        temp->next = head;
-       }
-   }
+        head = temp;
+  }
+   
    
    void AppendNode(int x)
    {
@@ -88,17 +81,18 @@ class DLL
       {
         InsertHead(x);
       }
+      
       else
       {
         while(t->next!=NULL)
         {
           t = t->next;
         }
-        Node* t = head;
         Node* temp = new Node;
         temp->data = x;
         temp->next = NULL;
         temp->prev = t;
+      }
    }
     
     
@@ -221,25 +215,25 @@ class DLL
    }
 
   
-}
+};
 
 
 
 int main()
 {
-  Xsll l1,l2;
+  DLL l1;
   for(int i = 0;i<1000;i++)
   {
     l1.InsertHead(rand()%100);
   }
-  
- 
+    cout << l1.Nodes() << endl; 
   
   for(int i = 0;i<1000;i++)
   {
       l1.AppendNode(rand()%100);
   }
-  
+  cout << l1.Nodes() << endl;
+  /*
    for(int i = 0;i<1000;i++)
   {
       l1.RemoveNode(1);
@@ -249,8 +243,9 @@ int main()
   {
       l1.AppendNode(rand()%100);
   }
+  /*
   l1.DeleteList();
   cout << l1.Nodes() << endl; 
-  
+  */
 }
 
