@@ -20,8 +20,15 @@ class Xsll
     
     ~Xsll()
     {
-      free(head);
-     
+       Node* temp = head;
+        Node* t;
+      
+        while(temp!=NULL)
+        {
+            t = temp->next;
+            free(temp);
+            temp = t;
+        }     
     }
     
     int Nodes()  //Number of Nodes
