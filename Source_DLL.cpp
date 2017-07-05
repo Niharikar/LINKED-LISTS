@@ -21,16 +21,7 @@ class DLL
 
   ~DLL()
   {
-    
-    Node* temp = head;
-    Node* t;
-
-    while(temp!=NULL)
-    {
-        t = temp->next;
-        free(temp);
-        temp = t;
-    }     
+    DeleteList(); 
   }
 
   int Nodes()  //Number of Nodes
