@@ -191,11 +191,14 @@ int main()
   
  cout << l1.Nodes() << endl;
  
+  
    for(int i = 0;i<1000;i++)
   {
       l1.AppendNode(rand()%100);
   }
   
+  cout << l1.NodeValue(45);
+  cout << l1.NodeValue(100);
   l1.DeleteList();
   cout << l1.Nodes() << endl; 
     
