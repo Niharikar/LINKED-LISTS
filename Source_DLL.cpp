@@ -201,6 +201,10 @@ int main()
       l1.RemoveNode(1);
   }
  cout << l1.Nodes() << endl; //PRINITNG no. of nodes
+  
+  cout << l1.NodeValue(34)<< endl;
+  cout << l1.NodeValue(1)<< endl;
+  cout << l1.NodeValue(100) << endl;
    for(int i = 0;i<1000;i++)
   {
       l1.AppendNode(rand()%100);
