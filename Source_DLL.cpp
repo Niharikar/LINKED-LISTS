@@ -35,41 +35,48 @@ class DLL
 
   int Nodes()  //Number of Nodes
   {
-        try
+         if(head)
         {
-            if(head)
+            Node* t = head;
+            int k = 1;
+            while(t->next != NULL)
             {
-                Node* t = head;
-                int k = 1;
-                while(t->next != NULL)
-                {
-                    t = t->next;
-                    k++;
-                }
-
-                return k;
+                t = t->next;
+                k++;
             }
 
-            else
-            {
-                throw 0;
-            }
+            return k;
         }
 
-        catch(int e)
+        else
         {
-            cout << "No Nodes in the List" << endl;
-
+            return 0;
         }
     }
     int NodeValue(int n)  // Value of a particular Node
     {
-        Node* t = head;
-        for(int i = 2;i <= n;i++)
+         Node* t = head;   
+        try
         {
-            t = t->next;
-        }
+            if(n>0 && n<= Nodes())
+            {
+           
+                for(int i = 2;i <= n;i++)
+                {
+                    t = t->next;
+                }
+            }
 
+           else
+           {
+              throw 0;
+           }
+        }
+      
+         catch(int e)
+         {
+           cout <<"Invalid position number entered"<<endl; 
+         }
         return t->data;
     }
 
@@ -109,106 +116,50 @@ class DLL
 
    void RemoveNode(int n)
    {
-      try
-        {
-            if(head==NULL)
-            {
-              throw "Exception: No Nodes in the linked list";
-            }
-
-
-            else if(n==1)
-            {
-              if(head->next==NULL)
-              {
-                free(head);
-                head = NULL;
+     
+      if(n<=Nodes() && n>0)
+      {
+              if(n==1)
+              {       
+                  Node* temp = head;
+                  head = temp->next;
+                  free(temp);  
               }
+
 
               else
-              {
-                Node* temp = head;
-                head = temp->next;
-                head->prev = NULL;
-                free(temp);
-              }
-
-            }
-
-
-            else
-            {
-                  Node* tx  = head;
-                  int k = 1;
-                  while(tx->next!=NULL)
-                  {
-                      tx = tx->next;
-                      k++;
-                  }
-                  if(n>k)
-                  {
-                      cout << " given position does not exist in the list" << endl;
-                      return;
-                  }
-
-                  if(n<1)
-                  {
-                      cout << "Enter a valid number" << endl;
-                      return;
-                  }
-
-                  Node* t = head;
-                  Node* te = head;
-                  for(int i = 2;i<=(n);i++)
-                  {
-                    t = t->next;
-                    if(i<=(n-1))
-                      te = te->next;
-                  }
+              {                 
+                    Node* t = head;
+                    Node* te = head;
+                    for(int i = 2;i<=(n);i++)
+                    {
+                      t = t->next;
+                      if(i<=(n-1))
+                        te = te->next;
+                    }
 
 
-                  if(t->next==NULL)
-                  {
-                        if(n==2)
-                        {
-                          Node* temp = t;
-                          head->next = NULL;
-                          free(temp);
-                        }
+                    if(t->next==NULL)
+                    {
+                        Node* temp = t;
+                        te->next = NULL;
+                        free(temp);                       
+                    }
 
-                        else
-                        {
-                          Node* temp = t;
-                          te->next = NULL;
-                          free(temp);
-                        }
-                  }
-
-
-                  else
-                  {
-                      if(n==2)
-                      {
-                        head->next = t->next;
-                        (t->next)->prev = head;
-                        free(t);
-                      }
-
-                      else
-                      {
+                    else
+                    {
                         te->next = t->next;
                         (t->next)->prev = te;
-                        free(t);
-                      }
-                  }
+                        free(t); 
+                    }
 
-            }
-        }
+              }
+      }
 
-        catch(char* msg)
-        {
-          cout << msg << endl;
-        }
+     else
+     {
+       cout <<"Invalid position number is entered" << endl;
+     }
    }
 
    void DeleteList()
