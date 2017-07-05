@@ -20,54 +20,56 @@ class Xsll
     
     ~Xsll()
     {
-       Node* temp = head;
-        Node* t;
-      
-        while(temp!=NULL)
-        {
-            t = temp->next;
-            free(temp);
-            temp = t;
-        }     
+       DeleteList();   
     }
     
     int Nodes()  //Number of Nodes
     {
-        try
+        if(head)
         {
-            if(head)
+            Node* t = head;
+            int k = 1;
+            while(t->next != NULL)
             {
-                Node* t = head;
-                int k = 1;
-                while(t->next != NULL)
-                {
-                    t = t->next;
-                    k++;
-                }
-                
-                return k;
+                t = t->next;
+                k++;
             }
-            
-            else
-            {
-                throw 0;
-            }
+
+            return k;
         }
-        
-        catch(int e)
+
+        else
         {
-            cout << "No Nodes in the List" << endl;
+            return 0;
         }
+      
     }
+  
+  
     int NodeValue(int n)  // Value of a particular Node
     {
-        
-        Node* t = head;
-        for(int i = 2;i <= n;i++)
+        Node* t = head;   
+        try
         {
-            t = t->next;
+            if(n>0 && n<= Nodes())
+            {
+           
+                for(int i = 2;i <= n;i++)
+                {
+                    t = t->next;
+                }
+            }
+
+           else
+           {
+              throw 0;
+           }
         }
-        
+      
+         catch(int e)
+         {
+           cout <<"Invalid position number entered"<<endl; 
+         }
         return t->data;
     }
     void InsertHead(int x)
@@ -101,106 +103,52 @@ class Xsll
 
     void RemoveNode(int n)  // 'n' is position of node
     {
-        try
+      
+        if(n<=Nodes() && n>0)
         {
-            if(head==NULL)
-            {
-              throw "Exception: No Nodes in the linked list";
-            }
-            
-        
-            else if(n==1)  
-            {
-              if(head->next==NULL)
-              {
-                free(head);
-                head = NULL;
-              }
-              
-              else
-              {
-                Node* temp = head;
-                head = temp->next;
-                free(temp);
-              }
-              
-            }
-          
-           
-            else
-            { 
-                  Node* tx  = head;
-                  int k = 1;
-                  while(tx->next!=NULL)
-                  {
-                      tx = tx->next;
-                      k++;
-                  }
-                  if(n>k)
-                  {
-                      cout << " given position does not exist in the list" << endl;
-                      return;
-                  }
-                  
-                  if(n<1)
-                  {
-                      cout << "Enter a valid number" << endl;
-                      return;
-                  }
-                  
-                  
-                  
-                  Node* t = head;
-                  Node* te = head;
-                  for(int i = 2;i<=(n);i++)
-                  {
-                    t = t->next;
-                    if(i<=(n-1))
-                      te = te->next;
-                  }
 
+                if(n==1)  
+                {                                         
+                    Node* temp = head;
+                    head = temp->next;
+                    free(temp);
+                }
 
-                  if(t->next==NULL)
-                  {
-                        if(n==2)
-                        {
-                          Node* temp = t;
-                          head->next = NULL;
-                          free(temp);
-                        }
+                else
+                { 
 
-                        else
-                        {  
-                          Node* temp = t; 
-                          te->next = NULL;
-                          free(temp);                
-                        }                
-                  }
-              
-              
-                  else
-                  {
-                      if(n==2)
-                      {                    
-                        head->next = t->next;
-                        free(t);
+                      Node* t = head;
+                      Node* te = head;
+                      for(int i = 2;i<=(n);i++)
+                      {
+                        t = t->next;
+                        if(i<=(n-1))
+                          te = te->next;
                       }
+
+                      if(t->next==NULL)
+                      {
+
+                          Node* temp = t;
+                          te->next = NULL;
+                          free(temp);                                                                
+                      }
+
 
                       else
-                      {
-                        te->next = t->next;
-                        free(t);                   
+                      {                    
+                          te->next = t->next;
+                          free(t);                 
                       }
-                  }
-           
-            }
+
+                }
         }
 
-        catch(char* msg)
+        else
         {
-          cout << msg << endl;
+           cout << "Invalid position number is entered" << endl; 
         }
-      
+             
     }
     
     void DeleteList()
@@ -229,24 +177,26 @@ int main()
     l1.InsertHead(rand()%100);
   }
   
- 
-  
   for(int i = 0;i<1000;i++)
   {
       l1.AppendNode(rand()%100);
   }
   
-   for(int i = 0;i<1000;i++)
-  {
+  cout <<l1.Nodes() << endl;
+  
+    for(int i = 0;i<1000;i++)
+    {
       l1.RemoveNode(1);
-  } 
+    } 
+  
  cout << l1.Nodes() << endl;
+ 
    for(int i = 0;i<1000;i++)
   {
       l1.AppendNode(rand()%100);
   }
+  
   l1.DeleteList();
   cout << l1.Nodes() << endl; 
-  
     
 }
