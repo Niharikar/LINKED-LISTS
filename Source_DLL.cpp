@@ -114,6 +114,7 @@ class DLL
               {       
                   Node* temp = head;
                   head = temp->next;
+                  temp->next->prev = NULL;
                   free(temp);  
               }
 
