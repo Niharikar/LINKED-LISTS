@@ -74,10 +74,23 @@ class DLL
 
   void InsertHead(int x)
   {
+    
+        if(head!=NULL)
+        {
+          Node* temp = new Node;
+          temp->data = x;
+          temp->prev = NULL;
+          temp->next = head;
+          head->prev = temp;  //*
+          temp->next = head;  //*
+          head = temp;
+          return;
+        }
+    
         Node* temp = new Node;
         temp->data = x;
+        temp->next = NULL;
         temp->prev = NULL;
-        temp->next = head;
         head = temp;
   }
 
